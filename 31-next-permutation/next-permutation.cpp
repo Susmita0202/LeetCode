@@ -1,40 +1,30 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        if(nums.size()==1)
-            return;
-        set<pair<int,int>> s;
-        bool found=false;
-        s.insert({nums[nums.size()-1],nums.size()-1});
-        for(int i=nums.size()-2;i>=0;i--){
-            int current_no=nums[i];
-            pair<int,int> z={INT_MAX,INT_MAX};
-            bool flag=false;
-            for(auto it:s){
-                if(it.first>current_no){
-                    flag=true;
-                    z=min(z,it);
-                }
+        // Part-1 finding breakpoint
+        int ind=-1;
+        int n=nums.size();
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]<nums[i+1]){
+                ind=i;
+                break;
             }
-            if(flag){
-                found=true;
-                s.erase(z);
-                s.insert({current_no,i});
-                nums[i]=z.first;
-                int j=i+1;
-                for(auto it:s){
-                    nums[j]=it.first;
-                    j++;
-                }
-            break;
+        }
+        //Part-2 if the last permutation is give
+        if(ind==-1){
+            reverse(nums.begin(),nums.end());
+        }
+        else{
+        //part-3 finding the lowest greater element than a[ind]
+        for(int i=n-1;i>ind;i--){
+            if(nums[i]>nums[ind]){
+                swap(nums[i],nums[ind]);
+                break;
             }
-            s.insert({nums[i],i});
         }
-        if(!found){
-            return sort(nums.begin(),nums.end());
+        //part-4 sorting the remaining array
+        reverse(nums.begin()+ind+1,nums.end());
         }
-        //stl provided by c++ next_permutation(nums.begin(),nums.end());
-        
         
     }
 };
