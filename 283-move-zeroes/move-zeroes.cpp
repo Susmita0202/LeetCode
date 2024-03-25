@@ -1,7 +1,7 @@
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        vector<int> temp;
+        //vector<int> temp;
         // 2 pointer approach
         int i1=0;
         for(int j=0;j<nums.size();j++){
