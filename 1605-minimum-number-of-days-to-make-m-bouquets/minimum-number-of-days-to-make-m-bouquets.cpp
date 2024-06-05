@@ -15,12 +15,12 @@ public:
         int high=maxDay(bloomDay);
         int n=bloomDay.size();
         int bloom=0;
-        int consequtive=0;
+        //int consequtive=0;
         int ans=0;
         int days=-1;
         while(low<=high){
             int mid=(low+high)/2;
-            consequtive=0;
+           // consequtive=0;
             bloom=0;
             ans=0;
             for(int i=0;i<n;i++){
