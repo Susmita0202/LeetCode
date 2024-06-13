@@ -14,6 +14,10 @@ public:
         int low=1;
         int high=maxDay(bloomDay);
         int n=bloomDay.size();
+        double total=(double)m*k;
+        if((total)>n){
+            return -1;
+        }
         int bloom=0;
         //int consequtive=0;
         int ans=0;
@@ -43,6 +47,7 @@ public:
                 low=mid+1;
             }
         }
+        cout<<endl;
         return days;
     }
 };
