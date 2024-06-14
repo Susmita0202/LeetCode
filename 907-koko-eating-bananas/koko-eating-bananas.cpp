@@ -27,6 +27,9 @@ public:
             high=mid-1;
         }
      }
+     cout<<endl;
+     cout<<endl;
      return low;
     }
+    
 };
