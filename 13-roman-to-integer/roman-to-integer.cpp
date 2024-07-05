@@ -15,12 +15,13 @@ public:
         for(int i=n-1;i>=0;i--){
             if(mpp[s[i]]<prev){
                 no=no-mpp[s[i]];
-                prev=mpp[s[i]];
+                
             }
             else{
                 no=no+mpp[s[i]];
-                prev=mpp[s[i]];
+                
             }
+            prev=mpp[s[i]];
         }
         return no;
     }
