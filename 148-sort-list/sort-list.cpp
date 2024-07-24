@@ -47,7 +47,7 @@ public:
         if(head==NULL || head->next==NULL){
             return head;
         }
-        ListNode* middle=findmid(head);
+        ListNode* middle=findmid(head);  //Using fast-slow pointer
         ListNode* right=middle->next;
         middle->next=NULL;
         ListNode* left=head;
