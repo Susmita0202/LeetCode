@@ -1,30 +1,33 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        // Part-1 finding breakpoint
-        int ind=-1;
-        int n=nums.size();
-        for(int i=n-2;i>=0;i--){
-            if(nums[i]<nums[i+1]){
-                ind=i;
+        int n = nums.size();
+        int idx = -1;
+        
+        // Step 1: Find the first decreasing element from the end
+        for (int i = n - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                idx = i;
                 break;
             }
-        }
-        //Part-2 if the last permutation is give
-        if(ind==-1){
-            reverse(nums.begin(),nums.end());
-        }
-        else{
-        //part-3 finding the lowest greater element than a[ind]
-        for(int i=n-1;i>ind;i--){
-            if(nums[i]>nums[ind]){
-                swap(nums[i],nums[ind]);
-                break;
-            }
-        }
-        //part-4 sorting the remaining array
-        reverse(nums.begin()+ind+1,nums.end());
         }
         
+        // If the array is in descending order, reverse it to get the smallest permutation
+        if (idx == -1) {
+            reverse(nums.begin(), nums.end());
+            return;
+        }
+        
+        // Step 2: Find the smallest element larger than nums[idx] from the end
+        int swapIdx = -1;
+        for (int i = n - 1; i > idx; i--) {
+            if (nums[i] > nums[idx]) {
+                swapIdx = i;
+                break;
+            }
+        }
+        swap(nums[idx], nums[swapIdx]);
+        reverse(nums.begin() + idx + 1, nums.end());
+    
     }
 };
