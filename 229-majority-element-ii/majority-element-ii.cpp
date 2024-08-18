@@ -1,19 +1,44 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        int cnt=0;
-       vector<int> ans;
-       int ele=0;
-       map<int,int>mpp;
-        for(int i=0;i<nums.size();i++){
-            mpp[nums[i]]++;
-        }
-        for(auto it:mpp){
-            if(it.second>nums.size()/3){
-                ans.push_back(it.first);
+       int n = nums.size(); // Size of the array
+
+        int cnt1 = 0, cnt2 = 0; // Counts
+        int el1 = INT_MIN; // Element 1
+        int el2 = INT_MIN; // Element 2
+
+        // Applying the Extended Boyer-Moore Voting Algorithm:
+        for (int i = 0; i < n; i++) {
+            if (cnt1 == 0 && el2 != nums[i]) {
+                cnt1 = 1;
+                el1 = nums[i];
+            }
+            else if (cnt2 == 0 && el1 != nums[i]) {
+                cnt2 = 1;
+                el2 = nums[i];
+            }
+            else if (nums[i] == el1) cnt1++;
+            else if (nums[i] == el2) cnt2++;
+            else {
+                cnt1--, cnt2--;
             }
         }
-        return ans;
+
+        vector<int> result; // List of answers
+
+        // Manually check if the stored elements in
+        // el1 and el2 are the majority elements:
+        cnt1 = 0, cnt2 = 0;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == el1) cnt1++;
+            if (nums[i] == el2) cnt2++;
+        }
+
+        int mini = int(n / 3) + 1;
+        if (cnt1 >= mini) result.push_back(el1);
+        if (cnt2 >= mini) result.push_back(el2);
+
+        return result;
     }
        
 };
